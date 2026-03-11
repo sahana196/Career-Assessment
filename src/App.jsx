@@ -50,7 +50,7 @@ export default function App() {
             </span>
           </div>
           <h1 className="font-display text-4xl md:text-5xl text-slate-900 mb-2 leading-tight">
-            Career <span className="text-gradient">Compass</span>
+            Career <span className="text-gradient">Assessment</span>
           </h1>
           <p className="text-slate-500 text-sm max-w-xs mx-auto">
             A psychometric assessment to discover your ideal career path.
@@ -111,7 +111,7 @@ export default function App() {
 
         {/* Footer */}
         <footer className="mt-12 text-center text-slate-700 text-xs">
-          Career Compass · Psychometric Assessment Platform
+          Career Assessment · Psychometric Assessment Platform
         </footer>
       </div>
     </div>
