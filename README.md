@@ -2,7 +2,7 @@
 
 A frontend career assessment application built with React (Vite) and Tailwind CSS.
 
-## 🚀 Getting Started
+
 
 ### 1. Install dependencies
 ```bash
