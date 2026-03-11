@@ -1,4 +1,4 @@
-# Career Compass — Psychometric Assessment App
+# Career Assessment — Psychometric Assessment App
 
 A frontend career assessment application built with React (Vite) and Tailwind CSS.
 
