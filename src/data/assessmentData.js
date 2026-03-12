@@ -19,15 +19,15 @@ export const PERSONALITY_QUESTIONS = [
 ];
 
 export const SUBJECTS = [
-  { id: "s_math",    label: "Mathematics",                    cluster: "quantitative",  icon: "📐" },
-  { id: "s_physics", label: "Physics",                        cluster: "scientific",    icon: "⚛️" },
-  { id: "s_chem",    label: "Chemistry",                      cluster: "scientific",    icon: "🧪" },
-  { id: "s_bio",     label: "Biology",                        cluster: "scientific",    icon: "🧬" },
-  { id: "s_english", label: "English / Literature",           cluster: "literary",      icon: "📖" },
-  { id: "s_cs",      label: "Computer Science",               cluster: "technical",     icon: "💻" },
-  { id: "s_social",  label: "Social Studies / History",       cluster: "social",        icon: "🌍" },
-  { id: "s_art",     label: "Arts / Craft / Design",          cluster: "creative",      icon: "🎨" },
-  { id: "s_commerce",label: "Commerce / Economics",           cluster: "quantitative",  icon: "📊" },
+  { id: "s_math", label: "Mathematics", cluster: "quantitative", icon: "📐" },
+  { id: "s_physics", label: "Physics", cluster: "scientific", icon: "⚛️" },
+  { id: "s_chem", label: "Chemistry", cluster: "scientific", icon: "🧪" },
+  { id: "s_bio", label: "Biology", cluster: "scientific", icon: "🧬" },
+  { id: "s_english", label: "English / Literature", cluster: "literary", icon: "📖" },
+  { id: "s_cs", label: "Computer Science", cluster: "technical", icon: "💻" },
+  { id: "s_social", label: "Social Studies / History", cluster: "social", icon: "🌍" },
+  { id: "s_art", label: "Arts / Craft / Design", cluster: "creative", icon: "🎨" },
+  { id: "s_commerce", label: "Commerce / Economics", cluster: "quantitative", icon: "📊" },
 ];
 
 export const CAREER_MAP = [
@@ -35,8 +35,11 @@ export const CAREER_MAP = [
     title: "Software Engineer",
     icon: "💻",
     color: "#6366f1",
+    domain: "Technology",
     clusters: ["technical", "quantitative", "analytical"],
     stream: "Science (PCM) / Computer Science",
+    outlook: "High (25% growth expected)",
+    industry: "Tech, Finance, Healthcare, Auto",
     whyMatch: "Your strong analytical mindset, interest in technology, and numerical aptitude align perfectly with software engineering.",
     degrees: ["B.Tech CSE", "BCA", "B.Sc. Computer Science", "MCA"],
     skills: ["Programming (Python/Java)", "Data Structures", "Problem Solving", "System Design", "Teamwork"],
@@ -53,8 +56,11 @@ export const CAREER_MAP = [
     title: "Doctor / Medical Professional",
     icon: "🩺",
     color: "#10b981",
+    domain: "Healthcare",
     clusters: ["scientific", "social", "resilient"],
     stream: "Science (PCB)",
+    outlook: "Stable (High demand globally)",
+    industry: "Hospitals, Research, Public Health",
     whyMatch: "Your empathy, scientific curiosity, and resilience under pressure are the hallmarks of an excellent medical professional.",
     degrees: ["MBBS", "BDS", "B.Pharm", "BAMS", "BHMS"],
     skills: ["Biology & Chemistry", "Clinical Reasoning", "Empathy", "Communication", "Decision Making"],
@@ -71,8 +77,11 @@ export const CAREER_MAP = [
     title: "Graphic / UX Designer",
     icon: "🎨",
     color: "#f43f5e",
+    domain: "Creative",
     clusters: ["creative", "technical", "openness"],
     stream: "Arts / Fine Arts / Design",
+    outlook: "Growing (Rise of digital products)",
+    industry: "Tech, Media, E-commerce, Gaming",
     whyMatch: "Your creative flair, open-minded thinking, and interest in technology make you a natural fit for design roles.",
     degrees: ["B.Des", "BFA", "B.Sc. Multimedia", "Diploma in UI/UX", "NID / NiFT"],
     skills: ["Figma / Adobe Suite", "Typography", "User Research", "Prototyping", "Visual Communication"],
@@ -89,8 +98,11 @@ export const CAREER_MAP = [
     title: "Chartered Accountant / Finance",
     icon: "📊",
     color: "#f59e0b",
+    domain: "Business",
     clusters: ["quantitative", "conscientious", "analytical"],
     stream: "Commerce (with Mathematics)",
+    outlook: "High (Crucial for all businesses)",
+    industry: "Audit, FinTech, Banking, Consulting",
     whyMatch: "Your precision, numerical fluency, and conscientiousness are exactly what finance and accounting demand.",
     degrees: ["B.Com", "BBA Finance", "CA Program (ICAI)", "CFA", "MBA Finance"],
     skills: ["Accounting & Taxation", "MS Excel & Tally", "Financial Modelling", "Attention to Detail", "Regulatory Knowledge"],
@@ -107,8 +119,11 @@ export const CAREER_MAP = [
     title: "Teacher / Educator",
     icon: "📚",
     color: "#8b5cf6",
+    domain: "Education",
     clusters: ["social", "literary", "leadership"],
     stream: "Arts / Humanities / Any Stream",
+    outlook: "Steady (Transforming via EdTech)",
+    industry: "Schools, EdTech, Universities",
     whyMatch: "Your love for people, communication skills, and leadership abilities make you an inspiring educator.",
     degrees: ["B.Ed", "BA + B.Ed", "M.Ed", "Diploma in Education", "B.El.Ed"],
     skills: ["Subject Expertise", "Communication", "Lesson Planning", "Empathy", "Classroom Management"],
@@ -125,8 +140,11 @@ export const CAREER_MAP = [
     title: "Journalist / Content Creator",
     icon: "✍️",
     color: "#06b6d4",
+    domain: "Creative",
     clusters: ["literary", "adventurous", "social"],
     stream: "Arts / Mass Communication / Journalism",
+    outlook: "High (Content-driven economy)",
+    industry: "Digital Media, TV, News, PR",
     whyMatch: "Your storytelling instinct, curiosity about the world, and social nature are perfect for media and content creation.",
     degrees: ["BA Journalism", "BMM", "B.Sc. Media Studies", "MA Mass Communication"],
     skills: ["Writing & Editing", "Research", "Interviewing", "Social Media", "SEO Basics"],
@@ -143,8 +161,11 @@ export const CAREER_MAP = [
     title: "Entrepreneur / Business Leader",
     icon: "🚀",
     color: "#f97316",
+    domain: "Business",
     clusters: ["leadership", "adventurous", "quantitative"],
     stream: "Commerce / BBA / Any Stream",
+    outlook: "Very High (Startup ecosystem growth)",
+    industry: "Venture Capital, Startups, Multi-corp",
     whyMatch: "Your bold thinking, love for challenges, and natural leadership instincts are the seeds of a great entrepreneur.",
     degrees: ["BBA", "B.Com + MBA", "MBA (IIM)", "B.Tech + MBA"],
     skills: ["Business Strategy", "Financial Literacy", "Networking", "Risk Management", "Negotiation"],
@@ -161,8 +182,11 @@ export const CAREER_MAP = [
     title: "Data Scientist / AI Engineer",
     icon: "🤖",
     color: "#3b82f6",
+    domain: "Technology",
     clusters: ["quantitative", "analytical", "technical"],
     stream: "Science (PCM) / Statistics / Computer Science",
+    outlook: "Very High (AI Revolution)",
+    industry: "Tech, Retail, Insurance, Research",
     whyMatch: "Your exceptional analytical mind, love for numbers, and technical curiosity put you on the frontier of AI and data science.",
     degrees: ["B.Tech CSE/AI", "B.Sc. Statistics", "B.Sc. Data Science", "M.Sc. AI/ML"],
     skills: ["Python & R", "Statistics & Probability", "Machine Learning", "SQL & Big Data", "Data Visualization"],
@@ -180,10 +204,12 @@ export const CAREER_MAP = [
 export function computeResults(answers, subjectScores) {
   const traitScores = {};
 
+
   [...INTEREST_QUESTIONS, ...PERSONALITY_QUESTIONS].forEach((q) => {
     const val = answers[q.id] ?? 3;
     traitScores[q.trait] = (traitScores[q.trait] || 0) + val;
   });
+
 
   SUBJECTS.forEach((s) => {
     const grade = subjectScores[s.id] ?? 0;
@@ -191,17 +217,48 @@ export function computeResults(answers, subjectScores) {
     traitScores[s.cluster] = (traitScores[s.cluster] || 0) + boost;
   });
 
+  // Compute confidence score (Reliability indicator)
+  // Logic: Check if interest traits match academic streaks in similar clusters
+  let conflictPoints = 0;
+  SUBJECTS.forEach(s => {
+    const gradeVal = subjectScores[s.id] ?? 0;
+    const traitVal = (traitScores[s.cluster] || 15) / 5; // average level from 1-5
+    if (gradeVal > 80 && traitVal < 2) conflictPoints += 1; // High grade, low interest
+    if (gradeVal < 40 && traitVal > 4) conflictPoints += 1; // Low grade, high interest
+  });
+  const confidence = Math.max(65, 98 - (conflictPoints * 8));
+
   const scored = CAREER_MAP.map((career) => {
     const total = career.clusters.reduce((sum, c) => sum + (traitScores[c] || 0), 0);
-    const maxPerCluster = 5 * INTEREST_QUESTIONS.filter(q => career.clusters.includes(q.trait)).length
-      + 5 * PERSONALITY_QUESTIONS.filter(q => career.clusters.includes(q.trait)).length
-      + 4 * SUBJECTS.filter(s => career.clusters.includes(s.cluster)).length;
-    const raw = maxPerCluster > 0 ? (total / maxPerCluster) * 100 : 50;
-    const fit = Math.min(97, Math.max(30, Math.round(raw * 0.7 + 28)));
-    return { ...career, fit, traitScores };
+    const maxPossible = career.clusters.length * 10; // Normalized factor
+    const raw = (total / maxPossible) * 10;
+    const fit = Math.min(97, Math.max(30, Math.round(raw * 5.5 + 20)));
+
+    // Explain match based on highest contributing traits
+    const matchLogic = career.clusters
+      .filter(c => (traitScores[c] || 0) > 4)
+      .map(c => c.charAt(0).toUpperCase() + c.slice(1))
+      .slice(0, 2)
+      .join(" & ");
+
+    return { ...career, fit, traitScores, matchLogic };
   });
 
-  return scored.sort((a, b) => b.fit - a.fit);
+  const sortedResults = scored.sort((a, b) => b.fit - a.fit);
+
+  // Aggregate Domain (Cluster) Scores for higher-level guidance
+  const domains = [...new Set(CAREER_MAP.map(c => c.domain))];
+  const domainResults = domains.map(d => {
+    const careersInDomain = sortedResults.filter(c => c.domain === d);
+    const avgFit = careersInDomain.reduce((sum, c) => sum + c.fit, 0) / careersInDomain.length;
+    return { name: d, fit: Math.round(avgFit) };
+  }).sort((a, b) => b.fit - a.fit);
+
+  return {
+    careers: sortedResults,
+    domains: domainResults,
+    confidence
+  };
 }
 
 export function getTraitProfile(answers) {

@@ -78,14 +78,92 @@
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #818cf8, #f472b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
   }
 
   .glow-indigo {
     box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+  }
+
+  .no-print {
+    display: block;
+  }
+}
+
+/* ─── Print Styles ──────────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  body {
+    background: white !important;
+    background-image: none !important;
+    color: black !important;
+    font-size: 11pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .card {
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+
+  header {
+    text-align: left !important;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px !important;
+  }
+
+  header h1 {
+    font-size: 24pt !important;
+    color: black !important;
+    justify-content: flex-start !important;
+  }
+
+  header p {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  .text-gradient {
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+  }
+
+  .grid {
+    display: block !important;
+  }
+
+  .grid > * {
+    margin-bottom: 15px !important;
+    width: 100% !important;
+  }
+
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  footer {
+    display: none !important;
   }
 }
 
