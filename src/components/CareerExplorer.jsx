@@ -118,7 +118,7 @@ export default function CareerExplorer() {
       </div>
 
       {/* Search & Filter */}
-      <div className="card p-4 space-y-4 shadow-xl border-slate-200/60 sticky top-4 z-10 bg-white/80 backdrop-blur-md">
+      <div className="card p-4 space-y-4 shadow-xl border-slate-200/60 bg-white">
         <div className="relative">
           <input
             type="text"
