@@ -313,7 +313,7 @@ function StreamDoughnut({ topCareers }) {
 
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
 
-export default function ResultsDashboard({ profile, results, answers, onRestart }) {
+export default function ResultsDashboard({ profile, results, answers, onRestart, onBack }) {
   const [expanded, setExpanded] = useState(0);
 
   const { careers, domains, confidence } = results;
@@ -445,7 +445,7 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
                <h3 className="font-display text-base text-slate-900 mb-4 flex items-center gap-2">
                  <span className="text-xl">🎓</span> Academic Performance
                </h3>
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                  <div>
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Marks</p>
                     <p className="text-lg font-bold text-slate-800">{results.academicProfile.total} / {results.academicProfile.totalPossible}</p>
@@ -465,9 +465,24 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
                     </p>
                  </div>
                  <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Stream Pref.</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Your Preference</p>
                     <p className="text-sm font-semibold text-slate-700">{results.academicProfile.preferredStream}</p>
                  </div>
+               </div>
+
+               {/* System Stream Recommendation */}
+               <div className="p-4 rounded-xl bg-indigo-600 text-white shadow-lg border border-indigo-400/30">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-bold uppercase tracking-widest text-indigo-200">System Recommendation</span>
+                    <span className="px-2 py-0.5 rounded bg-white text-indigo-600 text-[10px] font-black uppercase tracking-wider">AI Analysis</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                     <div className="text-xl font-display font-bold">{results.academicProfile.recommendedStream}</div>
+                     <div className="h-px sm:h-8 sm:w-px bg-white/20"></div>
+                     <div className="text-xs text-indigo-100 leading-tight">
+                        {results.academicProfile.recommendationReason} This is based on your highest performance and matched traits.
+                     </div>
+                  </div>
                </div>
             </div>
           )}
@@ -493,19 +508,26 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
       </div>
 
       {/* Dashboard Actions */}
-      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-6 no-print">
-        <div className="flex items-center gap-4">
-           <button 
-             className="btn-primary shadow-xl scale-105 active:scale-100 transition-transform" 
-             onClick={handleDownload}
-           >
-             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-             </svg>
-             Download Full Report
+      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-4 no-print">
+         <button 
+           className="btn-primary shadow-xl scale-105 active:scale-100 transition-transform" 
+           onClick={handleDownload}
+         >
+           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+           </svg>
+           Download Full Report
+         </button>
+         
+         <div className="flex items-center gap-2">
+           <button className="btn-ghost" onClick={onBack}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+              </svg>
+              Edit Scores
            </button>
            <button className="btn-ghost" onClick={onRestart}>Retake Assessment</button>
-        </div>
+         </div>
       </div>
     </div>
   );

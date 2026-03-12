@@ -272,6 +272,33 @@ export function computeResults(answers, subjectScores, profile) {
   });
   const confidence = Math.max(65, 98 - (conflictPoints * 8));
 
+  // 10th Grade Stream Recommendation Logic
+  if (profile?.grade === "10th" && academicProfile) {
+    const m = subjectScores;
+    const t = traitScores;
+    
+    const sciScore = ((m.m_math || 0) + (m.m_sci || 0)) / 2;
+    const commScore = ((m.m_math || 0) + (m.m_soc || 0)) / 2;
+    const artsScore = ((m.m_soc || 0) + (m.m_eng || 0)) / 2;
+
+    let rec = { stream: "Arts & Humanities", reason: "Strong verbal and social orientation." };
+
+    if (sciScore >= 70 || (t.scientific > 15 && t.analytical > 15)) {
+      if (t.scientific > (t.technical || 0) + 2) {
+        rec = { stream: "Science (PCMB)", reason: "Strong pull towards Biology and Life Sciences." };
+      } else if (t.technical > (t.scientific || 0)) {
+        rec = { stream: "Science (PCMC)", reason: "Exceptional technical and computational logic." };
+      } else {
+        rec = { stream: "Science (PCME)", reason: "Balanced analytical and electronic interest." };
+      }
+    } else if (commScore >= 60 && t.quantitative > 12) {
+      rec = { stream: "Commerce", reason: "High numerical aptitude and business interest." };
+    }
+
+    academicProfile.recommendedStream = rec.stream;
+    academicProfile.recommendationReason = rec.reason;
+  }
+
   const scored = CAREER_MAP.map((career) => {
     const total = career.clusters.reduce((sum, c) => sum + (traitScores[c] || 0), 0);
     const maxPossible = career.clusters.length * 10; // Normalized factor
