@@ -315,7 +315,6 @@ function StreamDoughnut({ topCareers }) {
 
 export default function ResultsDashboard({ profile, results, answers, onRestart }) {
   const [expanded, setExpanded] = useState(0);
-  const [activeTab, setActiveTab] = useState("domains");
 
   const { careers, domains, confidence } = results;
   const top = careers[0];
@@ -363,94 +362,63 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
         </div>
       </div>
 
-      {/* Main Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-        <div className="card p-4">
-           <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Top Match</p>
-           <p className="font-bold text-slate-900 truncate">{top.title}</p>
+      {/* 1. CAREER DOMAINS BLOCK */}
+      <section className="mb-10 animate-fade-in">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-slate-200"></div>
+          <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Career Domains</h3>
+          <div className="h-px flex-1 bg-slate-200"></div>
         </div>
-        <div className="card p-4">
-           <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Fit Index</p>
-           <p className="font-bold text-indigo-600">{top.fit}%</p>
-        </div>
-        <div className="card p-4">
-           <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Top Cluster</p>
-           <p className="font-bold text-slate-900">{domains[0].name}</p>
-        </div>
-        <div className="card p-4">
-           <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Confidence</p>
-           <p className={`font-bold ${confidence > 85 ? 'text-green-600' : 'text-amber-600'}`}>{confidence}%</p>
-        </div>
-      </div>
+        
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 className="font-display text-lg text-slate-900 mb-2">Domain Alignment</h3>
+          <p className="text-xs text-slate-500 mb-6">Broad career clusters where your natural traits and academic strengths overlap most significantly.</p>
+          
+          <div className="space-y-6">
+            {domains.slice(0, 3).map((domain, i) => (
+               <div key={domain.name} className="animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-sm font-bold text-slate-800">{domain.name}</span>
+                    <span className="text-xs font-bold text-indigo-600">{domain.fit}% Affinity</span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
+                      style={{ width: `${domain.fit}%`, transitionDelay: `${i * 150}ms` }}
+                    />
+                  </div>
+               </div>
+            ))}
+          </div>
 
-      {/* Tabs */}
-      <div className="flex gap-1 mb-5 p-1 bg-slate-100/50 rounded-xl border border-slate-200 no-print">
-        {[
-          { key: "domains", label: "Career Domains" },
-          { key: "careers", label: "Specific Roles" },
-          { key: "charts",  label: "Profile Analytics" },
-        ].map(tab => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-200 ${
-              activeTab === tab.key
-                ? "bg-white text-indigo-600 shadow-sm border border-slate-200"
-                : "text-slate-500 hover:text-slate-700"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Domain analysis - The "Clusters" Layer */}
-      {activeTab === "domains" && (
-        <div className="space-y-4 animate-fade-in">
-           <div className="bg-white border border-slate-200 rounded-2xl p-6">
-              <h3 className="font-display text-lg text-slate-900 mb-2">High-Level Domain Alignment</h3>
-              <p className="text-xs text-slate-500 mb-6">Your answers suggest you are most naturally suited for these broad career clusters.</p>
-              
-              <div className="space-y-6">
-                {domains.slice(0, 3).map((domain, i) => (
-                   <div key={domain.name} className="animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
-                      <div className="flex justify-between items-end mb-2">
-                        <span className="text-sm font-bold text-slate-800">{domain.name}</span>
-                        <span className="text-xs font-bold text-indigo-600">{domain.fit}% Affinity</span>
-                      </div>
-                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-1000"
-                          style={{ width: `${domain.fit}%`, transitionDelay: `${i * 150}ms` }}
-                        />
-                      </div>
-                   </div>
-                ))}
-              </div>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="card p-5 border-l-4 border-l-green-500">
-                 <h4 className="text-xs font-bold text-slate-900 mb-2 font-display uppercase tracking-wider">Career Consistency</h4>
-                 <p className="text-xs text-slate-600 leading-relaxed">
-                   Your {confidence}% confidence score indicates your interests and academic strengths in <strong>{domains[0].name}</strong> are well-aligned. {confidence > 85 ? 'This profile is highly reliable.' : 'Consider focusing more on your top academic subjects.'}
-                 </p>
-              </div>
-              <div className="card p-5 border-l-4 border-l-indigo-500">
-                 <h4 className="text-xs font-bold text-slate-900 mb-2 font-display uppercase tracking-wider">Primary Strength</h4>
-                 <p className="text-xs text-slate-600 leading-relaxed">
-                   The assessment highlights a dominant strength in the <strong>{top.domain}</strong> sector, specifically aligned with your <strong>{top.matchLogic}</strong> traits.
-                 </p>
-              </div>
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 border-l-4 border-l-green-500">
+               <h4 className="text-[10px] font-bold text-slate-900 mb-2 uppercase tracking-wider">Consistency Check</h4>
+               <p className="text-xs text-slate-600 leading-relaxed">
+                 Your {confidence}% reliability score indicates {confidence > 85 ? 'excellent' : 'moderate'} alignment between your stated interests and academic performance.
+               </p>
+            </div>
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 border-l-4 border-l-indigo-500">
+               <h4 className="text-[10px] font-bold text-slate-900 mb-2 uppercase tracking-wider">Primary Field</h4>
+               <p className="text-xs text-slate-600 leading-relaxed">
+                 The <strong>{domains[0].name}</strong> sector is your primary match area, reflecting your {top.matchLogic} traits.
+               </p>
+            </div>
+          </div>
         </div>
-      )}
+      </section>
 
-      {/* Career matches tab */}
-      {activeTab === "careers" && (
-        <div className="space-y-3 stagger">
-          {careers.map((career, i) => (
-            <div key={career.title} className="animate-fade-up">
+      {/* 2. SPECIFIC ROLES BLOCK */}
+      <section className="mb-10 animate-fade-in">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-slate-200"></div>
+          <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Specific Roles</h3>
+          <div className="h-px flex-1 bg-slate-200"></div>
+        </div>
+
+        <div className="space-y-4">
+          {careers.slice(0, 4).map((career, i) => (
+            <div key={career.title} className="animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
               <CareerCard
                 career={career}
                 rank={i}
@@ -460,18 +428,24 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
             </div>
           ))}
         </div>
-      )}
+      </section>
 
-      {/* Charts / analytics tab */}
-      {activeTab === "charts" && (
-        <div className="space-y-4 animate-fade-in">
+      {/* 3. PROFILE ANALYTICS BLOCK */}
+      <section className="mb-10 animate-fade-in">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-slate-200"></div>
+          <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Profile Analytics</h3>
+          <div className="h-px flex-1 bg-slate-200"></div>
+        </div>
+
+        <div className="space-y-4">
           <FitBarChart results={careers} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TraitRadarChart answers={answers} />
             <StreamDoughnut topCareers={careers} />
           </div>
         </div>
-      )}
+      </section>
 
       {/* Print only detailed metrics */}
       <div className="hidden print:block mt-8 border-t pt-8">
@@ -486,10 +460,10 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
       </div>
 
       {/* Dashboard Actions */}
-      <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
+      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-6 no-print">
         <div className="flex items-center gap-4">
            <button 
-             className="btn-primary" 
+             className="btn-primary shadow-xl scale-105 active:scale-100 transition-transform" 
              onClick={handleDownload}
            >
              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -497,9 +471,12 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
              </svg>
              Download Full Report
            </button>
-           <button className="btn-ghost" onClick={onRestart}>Retake</button>
+           <button className="btn-ghost" onClick={onRestart}>Retake Assessment</button>
         </div>
-        <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Mailing Data Solutions · Psychometric Dept</p>
+        <div className="text-center sm:text-right">
+          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Mailing Data Solutions</p>
+          <p className="text-[9px] text-slate-300 uppercase tracking-widest">Psychometric Assessment Department</p>
+        </div>
       </div>
     </div>
   );
