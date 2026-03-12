@@ -508,33 +508,35 @@ export default function ResultsDashboard({ profile, results, answers, onRestart,
       </div>
 
       {/* Dashboard Actions */}
-      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-4 no-print px-4">
+      <div className="mt-12 pt-10 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 no-print px-4 max-w-3xl mx-auto">
          <button 
-           className="btn-primary h-11 w-full sm:w-auto justify-center shadow-md active:scale-95" 
+           className="btn-primary h-12 w-full sm:w-auto px-10 justify-center shadow-lg active:scale-95 transition-all text-base" 
            onClick={handleDownload}
          >
-           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
            </svg>
            Download Full Report
          </button>
          
-         <button 
-           className="btn-ghost h-11 w-full sm:w-auto justify-center active:scale-95" 
-           onClick={onBack}
-         >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
-            </svg>
-            Edit Scores
-         </button>
+         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
+           <button 
+             className="btn-ghost h-12 w-full sm:w-auto px-8 justify-center border-slate-300 active:scale-95 transition-all" 
+             onClick={onBack}
+           >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+              </svg>
+              Edit Scores
+           </button>
 
-         <button 
-           className="btn-ghost h-11 w-full sm:w-auto justify-center active:scale-95" 
-           onClick={onRestart}
-         >
-           Retake Assessment
-         </button>
+           <button 
+             className="btn-ghost h-12 w-full sm:w-auto px-8 justify-center border-slate-300 active:scale-95 transition-all" 
+             onClick={onRestart}
+           >
+             Retake Assessment
+           </button>
+         </div>
       </div>
     </div>
   );
