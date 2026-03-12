@@ -460,7 +460,7 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
       </div>
 
       {/* Dashboard Actions */}
-      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-6 no-print">
+      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-6 no-print">
         <div className="flex items-center gap-4">
            <button 
              className="btn-primary shadow-xl scale-105 active:scale-100 transition-transform" 
@@ -472,10 +472,6 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
              Download Full Report
            </button>
            <button className="btn-ghost" onClick={onRestart}>Retake Assessment</button>
-        </div>
-        <div className="text-center sm:text-right">
-          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Mailing Data Solutions</p>
-          <p className="text-[9px] text-slate-300 uppercase tracking-widest">Psychometric Assessment Department</p>
         </div>
       </div>
     </div>
