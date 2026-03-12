@@ -439,6 +439,39 @@ export default function ResultsDashboard({ profile, results, answers, onRestart 
         </div>
 
         <div className="space-y-4">
+          {/* Academic Performance Summary (10th Grade) */}
+          {results.academicProfile && (
+            <div className="card p-6 bg-gradient-to-br from-indigo-50 to-white border-indigo-100">
+               <h3 className="font-display text-base text-slate-900 mb-4 flex items-center gap-2">
+                 <span className="text-xl">🎓</span> Academic Performance
+               </h3>
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                 <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Marks</p>
+                    <p className="text-lg font-bold text-slate-800">{results.academicProfile.total} / {results.academicProfile.totalPossible}</p>
+                 </div>
+                 <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Percentage</p>
+                    <p className="text-lg font-bold text-slate-800">{results.academicProfile.percentage}%</p>
+                 </div>
+                 <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Result Class</p>
+                    <p className={`text-sm font-black uppercase tracking-wide px-2 py-0.5 rounded-md inline-block ${
+                      results.academicProfile.classResult === "Distinction" ? "bg-emerald-100 text-emerald-700" :
+                      results.academicProfile.classResult === "First Class" ? "bg-indigo-100 text-indigo-700" :
+                      "bg-amber-100 text-amber-700"
+                    }`}>
+                      {results.academicProfile.classResult}
+                    </p>
+                 </div>
+                 <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Stream Pref.</p>
+                    <p className="text-sm font-semibold text-slate-700">{results.academicProfile.preferredStream}</p>
+                 </div>
+               </div>
+            </div>
+          )}
+
           <FitBarChart results={careers} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TraitRadarChart answers={answers} />

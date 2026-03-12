@@ -1,4 +1,4 @@
-import { SUBJECTS } from "../data/assessmentData";
+import { SUBJECTS, SUBJECTS_10TH, STREAMS_11TH } from "../data/assessmentData";
 
 function getGradeLabel(score) {
   if (!score) return { label: "—", color: "text-slate-600" };
@@ -17,7 +17,10 @@ function getBarColor(score) {
   return "#f43f5e";
 }
 
-export default function AcademicsScreen({ scores, onChange, onNext, onBack }) {
+export default function AcademicsScreen({ profile, scores, onChange, onNext, onBack }) {
+  const is10th = profile?.grade === "10th";
+  const subjects = is10th ? SUBJECTS_10TH : SUBJECTS;
+
   return (
     <div className="animate-fade-up">
       <div className="text-center mb-8">
@@ -26,13 +29,17 @@ export default function AcademicsScreen({ scores, onChange, onNext, onBack }) {
           <span className="text-indigo-400 text-xs font-semibold tracking-widest uppercase">Step 4 of 4</span>
         </div>
         <h2 className="font-display text-3xl text-slate-900 mb-2">Academic Strengths</h2>
-        <p className="text-slate-500 text-sm">Enter your approximate scores (0–100). Leave blank if not applicable.</p>
+        <p className="text-slate-500 text-sm">
+          {is10th 
+            ? "Enter your marks obtained out of 100 for each subject." 
+            : "Enter your approximate scores (0–100). Leave blank if not applicable."}
+        </p>
       </div>
 
       <div className="max-w-2xl mx-auto">
         <div className="card p-6 mb-6">
           <div className="space-y-4 stagger">
-            {SUBJECTS.map((s, i) => {
+            {subjects.map((s, i) => {
               const val = scores[s.id] ?? "";
               const numVal = Number(val);
               const { label, color } = getGradeLabel(numVal || 0);
@@ -76,6 +83,25 @@ export default function AcademicsScreen({ scores, onChange, onNext, onBack }) {
               );
             })}
           </div>
+
+          {is10th && (
+            <div className="mt-8 pt-8 border-t border-slate-100">
+               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                 Preferred Stream for 11th/12th
+               </label>
+               <select
+                 value={scores.preferredStream || ""}
+                 onChange={e => onChange("preferredStream", e.target.value)}
+                 className="input-field appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em_1em]"
+                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")` }}
+               >
+                 <option value="">Select Stream</option>
+                 {STREAMS_11TH.map(stream => (
+                   <option key={stream.id} value={stream.label}>{stream.label} — {stream.desc}</option>
+                 ))}
+               </select>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center justify-between">

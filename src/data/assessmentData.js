@@ -30,6 +30,23 @@ export const SUBJECTS = [
   { id: "s_commerce", label: "Commerce / Economics", cluster: "quantitative", icon: "📊" },
 ];
 
+export const SUBJECTS_10TH = [
+  { id: "m_math", label: "Mathematics", cluster: "quantitative", icon: "📐" },
+  { id: "m_sci", label: "Science", cluster: "scientific", icon: "⚛️" },
+  { id: "m_soc", label: "Social Studies", cluster: "social", icon: "🌍" },
+  { id: "m_eng", label: "English", cluster: "literary", icon: "📖" },
+  { id: "m_hin", label: "Hindi", cluster: "literary", icon: "📝" },
+  { id: "m_lang", label: "Kannada / Sanskrit", cluster: "literary", icon: "🏛️" },
+];
+
+export const STREAMS_11TH = [
+  { id: "pcmb", label: "Science (PCMB)", desc: "Physics, Chem, Math, Biology" },
+  { id: "pcmc", label: "Science (PCMC)", desc: "Physics, Chem, Math, Comp Sci" },
+  { id: "pce",  label: "Science (PCME)", desc: "Physics, Chem, Math, Electronics" },
+  { id: "comm", label: "Commerce", desc: "Accounts, Business, Econ" },
+  { id: "arts", label: "Arts / Humanities", desc: "History, Psych, Soc" },
+];
+
 export const CAREER_MAP = [
   {
     title: "Software Engineer",
@@ -201,30 +218,57 @@ export const CAREER_MAP = [
   },
 ];
 
-export function computeResults(answers, subjectScores) {
+export function computeResults(answers, subjectScores, profile) {
   const traitScores = {};
-
 
   [...INTEREST_QUESTIONS, ...PERSONALITY_QUESTIONS].forEach((q) => {
     const val = answers[q.id] ?? 3;
     traitScores[q.trait] = (traitScores[q.trait] || 0) + val;
   });
 
+  let academicProfile = null;
 
-  SUBJECTS.forEach((s) => {
-    const grade = subjectScores[s.id] ?? 0;
-    const boost = grade >= 85 ? 4 : grade >= 70 ? 3 : grade >= 55 ? 2 : grade >= 40 ? 1 : 0;
-    traitScores[s.cluster] = (traitScores[s.cluster] || 0) + boost;
-  });
+  if (profile?.grade === "10th") {
+    const subjects = SUBJECTS_10TH;
+    let totalMarks = 0;
+    
+    subjects.forEach(s => {
+      const marks = subjectScores[s.id] ?? 0;
+      totalMarks += marks;
+      const boost = marks >= 85 ? 4 : marks >= 70 ? 3 : marks >= 50 ? 2 : marks >= 35 ? 1 : 0;
+      traitScores[s.cluster] = (traitScores[s.cluster] || 0) + boost;
+    });
 
-  // Compute confidence score (Reliability indicator)
-  // Logic: Check if interest traits match academic streaks in similar clusters
+    const percentage = Number(((totalMarks / 600) * 100).toFixed(1)); // 6 subjects * 100
+    let classResult = "Pass";
+    if (percentage >= 75) classResult = "Distinction";
+    else if (percentage >= 60) classResult = "First Class";
+    else if (percentage >= 50) classResult = "Second Class";
+    else if (percentage < 35) classResult = "Fail";
+
+    academicProfile = {
+      total: totalMarks,
+      totalPossible: 600,
+      percentage,
+      classResult,
+      preferredStream: subjectScores.preferredStream || "Not Selected"
+    };
+  } else {
+    SUBJECTS.forEach((s) => {
+      const grade = subjectScores[s.id] ?? 0;
+      const boost = grade >= 85 ? 4 : grade >= 70 ? 3 : grade >= 55 ? 2 : grade >= 40 ? 1 : 0;
+      traitScores[s.cluster] = (traitScores[s.cluster] || 0) + boost;
+    });
+  }
+
+  // Compute confidence score
   let conflictPoints = 0;
-  SUBJECTS.forEach(s => {
+  const subjectsToTest = profile?.grade === "10th" ? SUBJECTS_10TH : SUBJECTS;
+  subjectsToTest.forEach(s => {
     const gradeVal = subjectScores[s.id] ?? 0;
-    const traitVal = (traitScores[s.cluster] || 15) / 5; // average level from 1-5
-    if (gradeVal > 80 && traitVal < 2) conflictPoints += 1; // High grade, low interest
-    if (gradeVal < 40 && traitVal > 4) conflictPoints += 1; // Low grade, high interest
+    const traitVal = (traitScores[s.cluster] || 15) / 5;
+    if (gradeVal > 85 && traitVal < 2) conflictPoints += 1;
+    if (gradeVal < 40 && traitVal > 4) conflictPoints += 1;
   });
   const confidence = Math.max(65, 98 - (conflictPoints * 8));
 
@@ -257,7 +301,8 @@ export function computeResults(answers, subjectScores) {
   return {
     careers: sortedResults,
     domains: domainResults,
-    confidence
+    confidence,
+    academicProfile
   };
 }
 

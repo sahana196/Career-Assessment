@@ -25,7 +25,7 @@ export default function App() {
   const handleSubject = (id, val) => setSubjectScores(prev => ({ ...prev, [id]: val }));
 
   const handleFinish = () => {
-    const computed = computeResults(answers, subjectScores);
+    const computed = computeResults(answers, subjectScores, profile);
     setResults(computed);
     setStep("results");
   };
@@ -123,6 +123,7 @@ export default function App() {
 
             {step === "academics" && (
               <AcademicsScreen
+                profile={profile}
                 scores={subjectScores}
                 onChange={handleSubject}
                 onNext={handleFinish}
