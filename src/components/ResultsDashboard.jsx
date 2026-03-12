@@ -508,9 +508,9 @@ export default function ResultsDashboard({ profile, results, answers, onRestart,
       </div>
 
       {/* Dashboard Actions */}
-      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-center items-center gap-4 no-print">
+      <div className="mt-12 pt-8 border-t border-slate-200 flex flex-wrap justify-center items-center gap-4 no-print">
          <button 
-           className="btn-primary shadow-xl scale-105 active:scale-100 transition-transform" 
+           className="btn-primary shadow-xl" 
            onClick={handleDownload}
          >
            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -519,15 +519,16 @@ export default function ResultsDashboard({ profile, results, answers, onRestart,
            Download Full Report
          </button>
          
-         <div className="flex items-center gap-2">
-           <button className="btn-ghost" onClick={onBack}>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
-              </svg>
-              Edit Scores
-           </button>
-           <button className="btn-ghost" onClick={onRestart}>Retake Assessment</button>
-         </div>
+         <button className="btn-ghost border border-slate-200" onClick={onBack}>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+            </svg>
+            Edit Scores
+         </button>
+
+         <button className="btn-ghost border border-slate-200" onClick={onRestart}>
+           Retake Assessment
+         </button>
       </div>
     </div>
   );

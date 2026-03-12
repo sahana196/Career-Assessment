@@ -239,7 +239,7 @@ export function computeResults(answers, subjectScores, profile) {
       traitScores[s.cluster] = (traitScores[s.cluster] || 0) + boost;
     });
 
-    const percentage = Number(((totalMarks / 600) * 100).toFixed(1)); // 6 subjects * 100
+    const percentage = Number(((totalMarks / 625) * 100).toFixed(1)); // 625 marks total
     let classResult = "Pass";
     if (percentage >= 75) classResult = "Distinction";
     else if (percentage >= 60) classResult = "First Class";
@@ -248,7 +248,7 @@ export function computeResults(answers, subjectScores, profile) {
 
     academicProfile = {
       total: totalMarks,
-      totalPossible: 600,
+      totalPossible: 625,
       percentage,
       classResult,
       preferredStream: subjectScores.preferredStream || "Not Selected"
